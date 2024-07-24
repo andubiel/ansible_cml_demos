@@ -1,0 +1,10 @@
+---
+- name: Gather facts
+  hosts: cml_catalyst
+  gather_facts: no
+
+  tasks:
+
+  - name: Gather Network facts
+    cisco.ios.ios_facts:
+    
