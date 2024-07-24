@@ -1,6 +1,7 @@
 ---
 - name: Gather facts
   hosts: cml_catalyst
+  connection: local
   gather_facts: no
 
   roles:
