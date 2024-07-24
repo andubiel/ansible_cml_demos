@@ -1,5 +1,5 @@
 ---
-- name: Gather napalm facts
+- name: Gather facts
   hosts: cml_catalyst
   gather_facts: no
 
