@@ -1,6 +1,6 @@
 ---
 - name: Gather napalm facts
-  hosts: lab
+  hosts: cml_catalyst
   gather_facts: no
 
   roles:
