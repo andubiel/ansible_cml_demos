@@ -1,15 +1,4 @@
 ---
-- name: Retrieve a repository from a distant location and make it available to the local EE
-  ansible.scm.git_retrieve:
-    origin:
-      url: "https://github.com/andubiel/ansible_cml_demos.git"
-    parent_directory: /tmp/
-    branch:
-      name: main
-      duplicate_detection: no
-  register: repository
-  when: inventory_hostname == 'localhost'
-
 - name: Gather facts
   hosts: cml_catalyst
   gather_facts: no
@@ -21,15 +10,29 @@
   hosts: localhost
   gather_facts: no
 
+  pre_tasks:
+  - name: Retrieve a repository from a distant location and make it available to the local EE
+    ansible.scm.git_retrieve:
+      origin:
+        url: "https://github.com/andubiel/ansible_cml_demos.git"
+      parent_directory: /tmp/
+      branch:
+        name: main
+        duplicate_detection: no
+    register: repository
+    when: inventory_hostname == 'localhost'
+
   roles:
     - cisco_lldp_topo
+  
+  tasks:
 
-- name: Publish the changes
-  ansible.scm.git_publish:
-    path: "{{ repository['path'] }}"
-    token: "{{ password }}"
-    user:
-      name: "{{ username }}"
-      email: "{{ email }}"
-  when: inventory_hostname == 'localhost'
+  - name: Publish the changes
+    ansible.scm.git_publish:
+      path: "{{ repository['path'] }}"
+      token: "{{ token }}"
+      user:
+        name: "{{ git_user }}"
+        email: "{{ email }}"
+    when: inventory_hostname == 'localhost'
 

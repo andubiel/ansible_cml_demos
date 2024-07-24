@@ -5,7 +5,7 @@
   run_once: True 
 
 - name: generate lldp_topo.png
-  command: /usr/bin/dot -Tpng -o lldp_topo.png
+  command: /usr/bin/dot -Tpng -o "{{ repository['path'] }}"/lldp_graphviz/lldp_topo.png
   args:
     stdin: "{{ lldp_topo }}"
   delegate_to: localhost
