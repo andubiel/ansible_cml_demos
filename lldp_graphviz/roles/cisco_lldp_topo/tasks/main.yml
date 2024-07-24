@@ -1,0 +1,12 @@
+- name: generate .dot data
+  set_fact:
+    lldp_topo: "{{ lookup('template', 'lldp_topo.dot.j2') }}"
+  delegate_to: localhost
+  run_once: True 
+
+- name: generate lldp_topo.png
+  command: /usr/bin/dot -Tpng -o lldp_topo.png
+  args:
+    stdin: "{{ lldp_topo }}"
+  delegate_to: localhost
+  run_once: True 

@@ -1,0 +1,40 @@
+{% import 'interface_macros.j2' as int %}
+
+{# Generate VLANs known on the switch #}
+
+{% for vlan in vlans %}
+{% for name, id in vlan.items() %}
+vlan {{ id }}
+ name {{ name }}
+{% endfor %}
+{% endfor %}
+
+{# Generate per interface configuration making use of either port profiles or variables as stated in the host_vars file #}
+{% set defaults = {  "description": "",
+                     "vlan": "1",
+                     "voicevlan": None,
+                     "nativevlan": "1",
+                     "portmode": 'access',
+                     "adminstate": 'disabled',
+                     "poe": False,
+                     "cdp": True } %}
+{% for port in interfaces %}
+int {{ port }}
+{%   set interface = interfaces[port] %}
+{%   if 'portprofile' in interface %}
+{%     if interfaces[port]['portprofile'] in portprofiles|map(attribute="name") %}
+{%       set portprofile = portprofiles | selectattr('name', 'equalto', interfaces[port]['portprofile'] ) | list %}
+{%       for p in defaults.keys() %}
+{%         if p in interface %}{{ int.set_parameter(p, interface) }}{% else %}
+{{           int.set_parameter(p, portprofile[0]) }}{% endif %}
+{%       endfor %}
+{%     endif %}
+{%   else %}
+{%     for p in defaults.keys() %}
+{%       if p in interface %}{{ int.set_parameter(p, interface) }}{% else %}
+{{         int.set_parameter(p, {p: defaults[p]}) }}{% endif %}
+{%     endfor %}
+{%   endif %}
+exit
+{% endfor %}
+
