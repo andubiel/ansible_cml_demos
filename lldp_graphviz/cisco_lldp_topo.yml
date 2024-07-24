@@ -15,7 +15,7 @@
     ansible.scm.git_retrieve:
       origin:
         url: "https://github.com/andubiel/ansible_cml_demos.git"
-      parent_directory: /tmp/
+      parent_directory: /tmp
       branch:
         name: main
         duplicate_detection: no
