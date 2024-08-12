@@ -6,7 +6,7 @@ In this demo we build a topology map of network switches as code using graphviz 
 
 ## Dependencies 
 This demo requires the following:
- 1. switches that are able to enable LLDP. My switches are running in Cisco Modelinb Labs (cml)
+ 1. switches that are LLDP enabled. My switches are running in Cisco Modeling Labs (cml)
  ~~~
  conf t
  lldp run
