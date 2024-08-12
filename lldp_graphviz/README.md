@@ -70,7 +70,7 @@ graphviz [platform:rpm]
 ~~~
 
 ### Run the job-template (playbook)
-When you run the playbook it will invoke the `role: napalm_get_facts` and create a new .png file with a timestamp.
+Everytime you run the playbook it will invoke the `role: napalm_get_facts` and create a new png file with a timestamp.
 
 The files can be viewed in lldp_graphviz/network/maps
 
