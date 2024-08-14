@@ -1,5 +1,5 @@
 # Network Discovery Map with LLDP
-In this demo we build a topology map of network switches as code using graphviz and the napalm collection.
+In this demo we build a topology map of network switches as code using graphviz and the napalm collection. This demo shows adding the ansible controller and version control to familiar examples of opensource graphviz for network maps.
 
 ![example](images/example.png)
 
