@@ -4,9 +4,9 @@
   gather_facts: no
 
   roles:
-    - { role: napalm_get_facts , filter: ['facts', 'lldp_neighbors'] } 
+    - { role: get_facts , filter: ['facts', 'lldp_neighbors'] } 
 
-- name: Generate LLDP topology graph
+- name: Generate topology graph
   hosts: localhost
   gather_facts: no
 
